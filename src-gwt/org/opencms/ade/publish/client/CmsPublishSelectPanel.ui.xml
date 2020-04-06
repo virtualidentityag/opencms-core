@@ -33,6 +33,9 @@
 			<cmsi:CmsCheckBox ui:field="m_checkboxSiblings"></cmsi:CmsCheckBox>
 		</cms:CmsSimplePanel>
 		<cms:CmsSimplePanel addStyleNames="{res.publishCss.checkboxes}">
+			<cmsi:CmsCheckBox ui:field="m_checkboxLanguageVariants"></cmsi:CmsCheckBox>
+		</cms:CmsSimplePanel>
+		<cms:CmsSimplePanel addStyleNames="{res.publishCss.checkboxes}">
 			<cmsi:CmsCheckBox ui:field="m_checkboxAddContents" /> 
 		</cms:CmsSimplePanel>
 		<cms:CmsSimplePanel addStyleNames="{res.publishCss.checkboxes}">

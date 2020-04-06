@@ -101,6 +101,9 @@ public final class Messages {
     public static final String GUI_PUBLISH_CHECKBOXES_SIBLINGS_0 = "GUI_PUBLISH_CHECKBOXES_SIBLINGS_0";
 
     /** Message constant for key in the resource bundle. */
+    public static final String GUI_PUBLISH_CHECKBOXES_LAN_VAR_0 = "GUI_PUBLISH_CHECKBOXES_LAN_VAR_0";
+
+    /** Message constant for key in the resource bundle. */
     public static final String GUI_PUBLISH_DIALOG_BACK_0 = "GUI_PUBLISH_DIALOG_BACK_0";
 
     /** Message constant for key in the resource bundle. */

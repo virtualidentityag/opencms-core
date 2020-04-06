@@ -574,6 +574,16 @@ public class CmsPublishDialog extends CmsPopup {
     }
 
     /**
+     * Sets the include language variants option.<p>
+     *
+     * @param includeLanguageVariants the include language variants option
+     */
+    public void setIncludeLanguageVariants(boolean includeLanguageVariants) {
+
+        m_publishOptions.setIncludeLanguageVariants(includeLanguageVariants);
+    }
+
+    /**
      * Changes the currently active panel.<p>
      *
      * @param panelId the number of the panel to show

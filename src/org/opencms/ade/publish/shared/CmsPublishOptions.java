@@ -75,6 +75,9 @@ public class CmsPublishOptions implements Serializable {
     /** Flag to include siblings. */
     private boolean m_includeSiblings;
 
+    /** Flag to include language variants. */
+    private boolean m_includeLanguageVariants;
+
     /** The additional publish parameters. */
     private Map<String, String> m_params;
 
@@ -152,6 +155,25 @@ public class CmsPublishOptions implements Serializable {
     public boolean isIncludeSiblings() {
 
         return m_includeSiblings;
+    }
+
+    /**
+     * Checks if to include language variants.<p>
+     *
+     * @return <code>true</code> if to include language variants
+     */
+    public boolean isIncludeLanguageVariants() {
+        return m_includeLanguageVariants;
+    }
+
+    /**
+     * Sets the flag to include language variants.<p>
+     *
+     * @param includeLanguageVariants
+     *         the flag to set
+     */
+    public void setIncludeLanguageVariants(final boolean includeLanguageVariants) {
+        m_includeLanguageVariants = includeLanguageVariants;
     }
 
     /**

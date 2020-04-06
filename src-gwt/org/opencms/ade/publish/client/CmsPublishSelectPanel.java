@@ -246,6 +246,10 @@ implements I_CmsPublishSelectionChangeHandler, I_CmsPublishItemStatusUpdateHandl
     @UiField
     protected CmsCheckBox m_checkboxSiblings;
 
+    /** The checkbox for including language variants resources. */
+    @UiField
+    protected CmsCheckBox m_checkboxLanguageVariants;
+
     /** The panel containing the publish groups. */
     @UiField
     protected Panel m_groupPanelContainer;
@@ -436,6 +440,7 @@ implements I_CmsPublishSelectionChangeHandler, I_CmsPublishItemStatusUpdateHandl
 
         m_checkboxRelated.setChecked(publishOptions.isIncludeRelated());
         m_checkboxSiblings.setChecked(publishOptions.isIncludeSiblings());
+        m_checkboxLanguageVariants.setChecked(publishOptions.isIncludeLanguageVariants());
         if (selectedWorkflowProject) {
             m_projectSelector.setEnabled(false);
             m_workflowSelector.setFormValueAsString(publishOptions.getProjectId().toString());
@@ -446,6 +451,7 @@ implements I_CmsPublishSelectionChangeHandler, I_CmsPublishItemStatusUpdateHandl
         m_cancelButton.setUseMinWidth(true);
         m_noResources.setText(messages.key(Messages.GUI_PUBLISH_DIALOG_NO_RES_0));
         m_checkboxSiblings.setText(messages.key(Messages.GUI_PUBLISH_CHECKBOXES_SIBLINGS_0));
+        m_checkboxLanguageVariants.setText(messages.key(Messages.GUI_PUBLISH_CHECKBOXES_LAN_VAR_0));
         m_checkboxRelated.setText(messages.key(Messages.GUI_PUBLISH_CHECKBOXES_REL_RES_0));
         m_checkboxProblems.setText(messages.key(Messages.GUI_PUBLISH_CHECKBOXES_PROBLEMS_0));
         m_selectorLabel.setText(messages.key(Messages.GUI_PUBLISH_TOP_PANEL_RIGHT_LABEL_0));
@@ -678,6 +684,8 @@ implements I_CmsPublishSelectionChangeHandler, I_CmsPublishItemStatusUpdateHandl
         m_checkboxRelated.setChecked(showResources && m_publishDialog.getPublishOptions().isIncludeRelated());
         m_checkboxSiblings.setEnabled(showResources);
         m_checkboxSiblings.setChecked(showResources && m_publishDialog.getPublishOptions().isIncludeSiblings());
+        m_checkboxLanguageVariants.setEnabled(showResources);
+        m_checkboxLanguageVariants.setChecked(showResources && m_publishDialog.getPublishOptions().isIncludeLanguageVariants());
         m_groupPanelContainer.setVisible(showResources);
         m_tooManyResources.setVisible(!showResources);
         m_tooManyResources.setText(tooManyResourcesMessage);
@@ -889,6 +897,23 @@ implements I_CmsPublishSelectionChangeHandler, I_CmsPublishItemStatusUpdateHandl
             return;
         }
         m_publishDialog.setIncludeSiblings(m_checkboxSiblings.isChecked());
+        m_publishDialog.updateResourceList();
+    }
+
+    /**
+     * Handles the click event for language variants resources check box.<p>
+     *
+     * @param event the click event
+     *
+     * @see com.google.gwt.event.dom.client.ClickHandler#onClick(com.google.gwt.event.dom.client.ClickEvent)
+     */
+    @UiHandler("m_checkboxLanguageVariants")
+    protected void onLanguageVariantsClick(ClickEvent event) {
+
+        if (!m_showResources) {
+            return;
+        }
+        m_publishDialog.setIncludeLanguageVariants(m_checkboxLanguageVariants.isChecked());
         m_publishDialog.updateResourceList();
     }
 
@@ -1133,6 +1158,7 @@ implements I_CmsPublishSelectionChangeHandler, I_CmsPublishItemStatusUpdateHandl
         m_scrollPanel.setVisible(visible);
         m_topBar.getElement().getStyle().setVisibility(visible ? Visibility.VISIBLE : Visibility.HIDDEN);
         m_checkboxSiblings.setVisible(true);
+        m_checkboxLanguageVariants.setVisible(true);
         m_checkboxRelated.setVisible(true);
     }
 
