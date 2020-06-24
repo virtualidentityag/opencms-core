@@ -2387,6 +2387,10 @@ public final class CmsObject {
     public CmsResource readDefaultFile(CmsResource folderResource, CmsResourceFilter resourceFilter)
     throws CmsSecurityException {
 
+        if (resourceFilter.equals(CmsResourceFilter.DEFAULT)){
+            return m_securityManager.readDefaultFile(m_context, folderResource, CmsResourceFilter.ignoreExpirationOffline(this));
+        }
+
         return m_securityManager.readDefaultFile(m_context, folderResource, resourceFilter);
     }
 
@@ -2413,7 +2417,7 @@ public final class CmsObject {
      */
     public CmsResource readDefaultFile(String resourceNameOrID) throws CmsException, CmsSecurityException {
 
-        return readDefaultFile(resourceNameOrID, CmsResourceFilter.DEFAULT);
+        return readDefaultFile(resourceNameOrID, CmsResourceFilter.ignoreExpirationOffline(this));
     }
 
     /**
@@ -2441,13 +2445,15 @@ public final class CmsObject {
     public CmsResource readDefaultFile(String resourceNameOrID, CmsResourceFilter filter)
     throws CmsException, CmsSecurityException {
 
+        CmsResourceFilter resourceFilter = filter.equals(CmsResourceFilter.DEFAULT) ? CmsResourceFilter.ignoreExpirationOffline(this) : filter;
+
         CmsResource resource;
         if (CmsUUID.isValidUUID(resourceNameOrID)) {
-            resource = readResource(new CmsUUID(resourceNameOrID), filter);
+            resource = readResource(new CmsUUID(resourceNameOrID), resourceFilter);
         } else {
-            resource = readResource(resourceNameOrID, filter);
+            resource = readResource(resourceNameOrID, resourceFilter);
         }
-        return m_securityManager.readDefaultFile(m_context, resource, filter);
+        return m_securityManager.readDefaultFile(m_context, resource, resourceFilter);
     }
 
     /**
