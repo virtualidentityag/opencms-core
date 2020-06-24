@@ -2594,7 +2594,7 @@ public final class CmsObject {
      */
     public CmsResource readResource(String resourcename) throws CmsException {
 
-        return readResource(resourcename, CmsResourceFilter.DEFAULT);
+        return readResource(resourcename, CmsResourceFilter.ignoreExpirationOffline(this));
     }
 
     /**
@@ -2617,7 +2617,9 @@ public final class CmsObject {
      * @see #readFolder(String, CmsResourceFilter)
      */
     public CmsResource readResource(String resourcename, CmsResourceFilter filter) throws CmsException {
-
+        if (filter.equals(CmsResourceFilter.DEFAULT)) {
+            return m_securityManager.readResource(m_context, addSiteRoot(resourcename), CmsResourceFilter.ignoreExpirationOffline(this));
+        }
         return m_securityManager.readResource(m_context, addSiteRoot(resourcename), filter);
     }
 
