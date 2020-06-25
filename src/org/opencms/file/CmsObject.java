@@ -2526,7 +2526,7 @@ public final class CmsObject {
      */
     public CmsResource readResource(CmsUUID structureID) throws CmsException {
 
-        return readResource(structureID, CmsResourceFilter.DEFAULT);
+        return readResource(structureID, CmsResourceFilter.ignoreExpirationOffline(this));
     }
 
     /**
